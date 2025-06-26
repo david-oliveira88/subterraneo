@@ -1,19 +1,31 @@
 
+import matplotlib.pyplot as plt
+import io
+import base64
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import logging
 import numpy as np
 
-from .core import SistemaDeCabos
-from .data_models import Coordenadas
-from .reporting import gerar_memorial_calculo
+from core import SistemaDeCabos
+from data_models import Coordenadas
+from reporting import gerar_memorial_calculo
 
 app = FastAPI(
     title="API para Cálculo de Tensão Induzida em Cabos Subterrâneos",
     description="Esta API permite a análise de tensões induzidas em sistemas de cabos subterrâneos, com base em parâmetros físicos e elétricos.",
     version="1.0.0"
 )
+
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root():
+    with open("index.html", "r", encoding="utf-8") as f:
+        return HTMLResponse(content=f.read())
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -46,6 +58,48 @@ class SystemInput(BaseModel):
     k_tov_rede: float
     cabos_config: List[CaboInput]
     eccs_config: List[EccConfigInput]
+
+@app.post("/plot_layout/", summary="Gera um gráfico da disposição dos cabos e ECCs")
+async def plot_layout(system_input: SystemInput) -> Dict[str, str]:
+    try:
+        # Extrair coordenadas dos cabos
+        cable_coords_x = [c.coord.x for c in system_input.cabos_config]
+        cable_coords_y = [c.coord.y for c in system_input.cabos_config]
+
+        # Extrair coordenadas dos ECCs
+        ecc_coords_x = [e.coord.x for e in system_input.eccs_config]
+        ecc_coords_y = [e.coord.y for e in system_input.eccs_config]
+
+        # Criar o gráfico
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ax.scatter(cable_coords_x, cable_coords_y, color='blue', marker='o', label='Cabos')
+        ax.scatter(ecc_coords_x, ecc_coords_y, color='red', marker='s', label='ECCs')
+
+        # Adicionar rótulos para os cabos
+        for i, cable in enumerate(system_input.cabos_config):
+            ax.text(cable.coord.x, cable.coord.y, f' {cable.nome}', fontsize=9)
+
+        ax.set_xlabel("Coordenada X (m)")
+        ax.set_ylabel("Coordenada Y (m)")
+        ax.set_title("Disposição dos Cabos e ECCs")
+        ax.legend()
+        ax.grid(True)
+        ax.set_aspect('equal', adjustable='box') # Manter proporção para visualização correta
+
+        # Salvar o gráfico em um buffer de memória
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png', bbox_inches='tight')
+        buf.seek(0)
+        plt.close(fig) # Fechar a figura para liberar memória
+
+        # Codificar a imagem em Base64
+        image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+
+        return {"image_base64": image_base64}
+
+    except Exception as e:
+        logging.error(f"Erro ao gerar o gráfico de layout: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Erro ao gerar o gráfico de layout: {str(e)}")
 
 @app.post("/calculate/", 
           summary="Calcula as tensões induzidas e dimensiona os componentes do sistema",

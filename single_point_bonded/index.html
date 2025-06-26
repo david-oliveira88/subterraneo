@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Tensão Induzida</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); max-width: 800px; margin: auto; }
+        h1 { color: #333; text-align: center; }
+        h2 { color: #333; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #555; }
+        input[type="number"], input[type="text"], select, textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea { min-height: 120px; font-family: monospace; }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover { background-color: #0056b3; }
+        #response {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            color: #333;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .loading { text-align: center; margin-top: 10px; font-style: italic; color: #666; }
+        .json-example { font-size: 0.9em; color: #777; background-color: #f9f9f9; border: 1px solid #eee; padding: 10px; border-radius: 4px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cálculo de Tensão Induzida em Cabos Subterrâneos</h1>
+
+        
+        <form id="calculationForm">
+            <h2>Parâmetros Gerais do Sistema</h2>
+            <div class="form-group">
+                <label for="comprimento_linha_km">Comprimento da Linha (km):</label>
+                <input type="number" id="comprimento_linha_km" value="1" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="resistencia_malha_terra_ohm">Resistência da Malha de Terra (Ohm):</label>
+                <input type="number" id="resistencia_malha_terra_ohm" value="0.5" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="resistividade_solo_ohm_m">Resistividade do Solo (Ohm.m):</label>
+                <input type="number" id="resistividade_solo_ohm_m" value="100" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="frequencia_rede_hz">Frequência da Rede (Hz):</label>
+                <input type="number" id="frequencia_rede_hz" value="60" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="correntes_nominais_amp">Correntes Nominais (Amp, separadas por vírgula, ex: 1000,1000):</label>
+                <input type="text" id="correntes_nominais_amp" value="1000,1000" required>
+            </div>
+            <div class="form-group">
+                <label for="corrente_falta_3ph_amp">Corrente de Falta 3ph (Amp):</label>
+                <input type="number" id="corrente_falta_3ph_amp" value="20000" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="corrente_falta_1ph_amp">Corrente de Falta 1ph (Amp):</label>
+                <input type="number" id="corrente_falta_1ph_amp" value="10000" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="tempo_eliminacao_falta_s">Tempo de Eliminação da Falta (s):</label>
+                <input type="number" id="tempo_eliminacao_falta_s" value="0.5" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_isolacao_ecc">Tipo de Isolação ECC:</label>
+                <select id="tipo_isolacao_ecc" required>
+                    <option value="XLPE">XLPE</option>
+                    <option value="EPR">EPR</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nbi_blindagem_kvp">NBI Blindagem (kVp):</label>
+                <input type="number" id="nbi_blindagem_kvp" value="170" step="1" required>
+            </div>
+            <div class="form-group">
+                <label for="k_tov_rede">K TOV Rede:</label>
+                <input type="number" id="k_tov_rede" value="1.4" step="0.1" required>
+            </div>
+            
+            <h2>Configuração dos Cabos (JSON)</h2>
+            <div class="form-group">
+                <label for="cabos_config_json">Insira a configuração dos cabos como um array JSON:</label>
+                <textarea id="cabos_config_json" required>[
+    {
+        "nome": "Fase 1A",
+        "coord": { "x": -0.8, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    },
+    {
+        "nome": "Fase 1B",
+        "coord": { "x": -0.5, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    },
+    {
+        "nome": "Fase 1C",
+        "coord": { "x": -0.2, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    },
+    {
+        "nome": "Fase 2A",
+        "coord": { "x": 0.2, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    },
+    {
+        "nome": "Fase 2B",
+        "coord": { "x": 0.5, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    },
+    {
+        "nome": "Fase 2C",
+        "coord": { "x": 0.8, "y": 4.5 },
+        "cond_res_oh_m": 0.00021,
+        "cond_gmr": 0.0060351,
+        "blin_res_oh_m": 0.000119866,
+        "blin_raio_m": 0.02389
+    }
+]</textarea>
+                <div class="json-example">
+                    Exemplo de um cabo:
+                    <pre>{
+    "nome": "Nome do Cabo",
+    "coord": { "x": 0.0, "y": 0.0 },
+    "cond_res_oh_m": 0.00002,  // Resistência do condutor (Ohm/m)
+    "cond_gmr": 0.0001,       // GMR do condutor (m)
+    "blin_res_oh_m": 0.00005, // Resistência da blindagem (Ohm/m)
+    "blin_raio_m": 0.01       // Raio da blindagem (m)
+}</pre>
+                </div>
+            </div>
+
+            <h2>Configuração dos ECCs (JSON)</h2>
+            <div class="form-group">
+                <label for="eccs_config_json">Insira a configuração dos ECCs como um array JSON:</label>
+                <textarea id="eccs_config_json" required>[
+    { "coord": { "x": -0.5, "y": 4.2 } },
+    { "coord": { "x": 0.5, "y": 4.2 } }
+]</textarea>
+                <div class="json-example">
+                    Exemplo de um ECC:
+                    <pre>{
+    "coord": { "x": 0.0, "y": 0.0 } // Coordenadas do ECC
+}</pre>
+                </div>
+            </div>
+            
+            <button type="submit">Calcular</button>
+        </form>
+
+        <h2>Diagrama de Disposição dos Cabos</h2>
+        <button id="generateDiagram">Gerar Diagrama de Disposição</button>
+        <canvas id="cableDiagramCanvas" width="600" height="400" style="border:1px solid #d3d3d3; background-color: #f9f9f9; margin-top: 15px;"></canvas>
+
+        <div id="loading" class="loading" style="display:none;">Calculando...</div>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('calculationForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const loadingDiv = document.getElementById('loading');
+            const responseDiv = document.getElementById('response');
+            loadingDiv.style.display = 'block';
+            responseDiv.textContent = '';
+
+            try {
+                const cabosConfig = JSON.parse(document.getElementById('cabos_config_json').value);
+                const eccsConfig = JSON.parse(document.getElementById('eccs_config_json').value);
+
+                const formData = {
+                    comprimento_linha_km: parseFloat(document.getElementById('comprimento_linha_km').value),
+                    resistencia_malha_terra_ohm: parseFloat(document.getElementById('resistencia_malha_terra_ohm').value),
+                    resistividade_solo_ohm_m: parseFloat(document.getElementById('resistividade_solo_ohm_m').value),
+                    frequencia_rede_hz: parseFloat(document.getElementById('frequencia_rede_hz').value),
+                    correntes_nominais_amp: document.getElementById('correntes_nominais_amp').value.split(',').map(Number),
+                    corrente_falta_3ph_amp: parseFloat(document.getElementById('corrente_falta_3ph_amp').value),
+                    corrente_falta_1ph_amp: parseFloat(document.getElementById('corrente_falta_1ph_amp').value),
+                    tempo_eliminacao_falta_s: parseFloat(document.getElementById('tempo_eliminacao_falta_s').value),
+                    tipo_isolacao_ecc: document.getElementById('tipo_isolacao_ecc').value,
+                    nbi_blindagem_kvp: parseFloat(document.getElementById('nbi_blindagem_kvp').value),
+                    k_tov_rede: parseFloat(document.getElementById('k_tov_rede').value),
+                    cabos_config: cabosConfig,
+                    eccs_config: eccsConfig
+                };
+
+                const response = await fetch('/calculate/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    responseDiv.textContent = data.memorial_de_calculo;
+                } else {
+                    responseDiv.textContent = 'Erro: ' + (data.detail || JSON.stringify(data));
+                    responseDiv.style.color = 'red';
+                }
+            } catch (error) {
+                responseDiv.textContent = 'Erro ao processar dados ou conectar com a API: ' + error.message;
+                responseDiv.style.color = 'red';
+            } finally {
+                loadingDiv.style.display = 'none';
+            }
+        });
+
+        document.getElementById('generateDiagram').addEventListener('click', function() {
+            const canvas = document.getElementById('cableDiagramCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            try {
+                const cabosConfig = JSON.parse(document.getElementById('cabos_config_json').value);
+                const eccsConfig = JSON.parse(document.getElementById('eccs_config_json').value);
+
+                let allCoords = [];
+                cabosConfig.forEach(c => allCoords.push(c.coord));
+                eccsConfig.forEach(e => allCoords.push(e.coord));
+
+                if (allCoords.length === 0) {
+                    ctx.font = '16px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Nenhuma coordenada para desenhar.', canvas.width / 2, canvas.height / 2);
+                    return;
+                }
+
+                // Find min/max coordinates
+                let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+                allCoords.forEach(c => {
+                    minX = Math.min(minX, c.x);
+                    maxX = Math.max(maxX, c.x);
+                    minY = Math.min(minY, c.y);
+                    maxY = Math.max(maxY, c.y);
+                });
+
+                // Add some padding to the bounds
+                const padding = 0.2; // meters
+                minX -= padding;
+                maxX += padding;
+                minY -= padding;
+                maxY += padding;
+
+                const dataWidth = maxX - minX;
+                const dataHeight = maxY - minY;
+
+                const canvasPadding = 40; // pixels, increased for axis labels
+                const availableWidth = canvas.width - 2 * canvasPadding;
+                const availableHeight = canvas.height - 2 * canvasPadding;
+
+                const scaleX = availableWidth / dataWidth;
+                const scaleY = availableHeight / dataHeight;
+                const scale = Math.min(scaleX, scaleY);
+
+                // Calculate offset to center the drawing, considering new padding
+                const offsetX = canvasPadding - minX * scale + (availableWidth - dataWidth * scale) / 2;
+                const offsetY = canvasPadding - minY * scale + (availableHeight - dataHeight * scale) / 2;
+
+                // --- Draw Grid --- 
+                ctx.strokeStyle = '#e0e0e0'; // Light gray for grid lines
+                ctx.lineWidth = 0.5;
+                ctx.font = '10px Arial';
+                ctx.fillStyle = '#666'; // Darker gray for labels
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                // Determine grid step (e.g., 0.5m or 1m)
+                let gridStepX = 1;
+                if (dataWidth < 2) gridStepX = 0.2;
+                else if (dataWidth < 5) gridStepX = 0.5;
+
+                let gridStepY = 1;
+                if (dataHeight < 2) gridStepY = 0.2;
+                else if (dataHeight < 5) gridStepY = 0.5;
+
+                // Draw vertical grid lines and X-axis labels
+                for (let x = Math.floor(minX / gridStepX) * gridStepX; x <= maxX; x += gridStepX) {
+                    const canvasX = x * scale + offsetX;
+                    ctx.beginPath();
+                    ctx.moveTo(canvasX, canvasPadding);
+                    ctx.lineTo(canvasX, canvas.height - canvasPadding);
+                    ctx.stroke();
+                    ctx.fillText(x.toFixed(1) + 'm', canvasX, canvas.height - canvasPadding + 15);
+                }
+
+                // Draw horizontal grid lines and Y-axis labels
+                for (let y = Math.floor(minY / gridStepY) * gridStepY; y <= maxY; y += gridStepY) {
+                    const canvasY = y * scale + offsetY;
+                    ctx.beginPath();
+                    ctx.moveTo(canvasPadding, canvasY);
+                    ctx.lineTo(canvas.width - canvasPadding, canvasY);
+                    ctx.stroke();
+                    ctx.fillText(y.toFixed(1) + 'm', canvasPadding - 15, canvasY);
+                }
+
+                // Draw X and Y axes (thicker lines)
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(canvasPadding, offsetY); // Y-axis
+                ctx.lineTo(canvas.width - canvasPadding, offsetY);
+                ctx.moveTo(offsetX, canvasPadding); // X-axis
+                ctx.lineTo(offsetX, canvas.height - canvasPadding);
+                ctx.stroke();
+
+                // Draw cables
+                ctx.fillStyle = 'blue';
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 1;
+                cabosConfig.forEach(c => {
+                    const canvasX = c.coord.x * scale + offsetX;
+                    const canvasY = c.coord.y * scale + offsetY;
+                    const radius = 5; // Fixed radius for visualization
+
+                    ctx.beginPath();
+                    ctx.arc(canvasX, canvasY, radius, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = 'black';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(c.nome, canvasX, canvasY - radius - 5);
+                });
+
+                // Draw ECCs
+                ctx.fillStyle = 'green';
+                ctx.strokeStyle = 'darkgreen';
+                eccsConfig.forEach(e => {
+                    const canvasX = e.coord.x * scale + offsetX;
+                    const canvasY = e.coord.y * scale + offsetY;
+                    const radius = 3; // Smaller radius for ECCs
+
+                    ctx.beginPath();
+                    ctx.arc(canvasX, canvasY, radius, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = 'darkgreen';
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('ECC', canvasX, canvasY + radius + 10);
+                });
+
+            } catch (error) {
+                ctx.font = '16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillStyle = 'red';
+                ctx.fillText('Erro ao gerar diagrama: ' + error.message, canvas.width / 2, canvas.height / 2);
+                console.error('Erro ao gerar diagrama:', error);
+            }
+        });
+    </script>
+</body>
+</html>

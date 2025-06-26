@@ -3,8 +3,8 @@ import numpy as np
 import logging
 from typing import List, Tuple, Dict, Optional
 
-from .constants import J, PERMEABILIDADE_MAGNETICA, OPERADOR_ALPHA, K_COBRE_ADIABATICO
-from .data_models import Coordenadas, SVL, CaboECC, SVL_DISPONIVEIS, ECC_DISPONIVEIS
+from constants import J, PERMEABILIDADE_MAGNETICA, OPERADOR_ALPHA, K_COBRE_ADIABATICO
+from data_models import Coordenadas, SVL, CaboECC, SVL_DISPONIVEIS, ECC_DISPONIVEIS
 
 class CondutorBase:
     """Classe base para condutores com propriedades de impedância."""
@@ -57,7 +57,7 @@ class SistemaDeCabos:
         self.frequencia_hz = frequencia_hz
         self.freq_angular = 2 * np.pi * self.frequencia_hz
         self.profundidade_retorno_terra = (1.85 / np.sqrt(self.freq_angular * PERMEABILIDADE_MAGNETICA / self.resistividade_solo))
-                self.termo_resistivo_terra = self.freq_angular * PERMEABILIDADE_MAGNETICA / 8.0
+        self.termo_resistivo_terra = self.freq_angular * PERMEABILIDADE_MAGNETICA / 8.0
 
         if considerar_capacitancia:
             raise NotImplementedError("O cálculo com capacitância ainda não foi implementado.")
