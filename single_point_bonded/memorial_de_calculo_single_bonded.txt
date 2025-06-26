@@ -1,0 +1,307 @@
+================================================================================
+MEMORIAL DE CÁLCULO DE TENSÕES INDUZIDAS E DIMENSIONAMENTOS
+================================================================================
+Data da Geração: 26/06/2025 15:50:55
+Comprimento da Linha: 0.8 km
+
+------------------------- DADOS DE ENTRADA DO SISTEMA --------------------------
+Frequência da Rede: 60.0 Hz
+Resistividade do Solo: 100.0 Ohm.m
+Resistência da Malha de Terra (extremidades): 0.5 Ohm
+Profundidade Equivalente de Retorno (De): 849.97 m
+
+Configuração dos Cabos:
+  1. Fase 1A: Coordenadas=(x=-0.8, y=4.5) m
+  2. Fase 1B: Coordenadas=(x=-0.5, y=4.5) m
+  3. Fase 1C: Coordenadas=(x=-0.2, y=4.5) m
+  4. Fase 2A: Coordenadas=(x=0.2, y=4.5) m
+  5. Fase 2B: Coordenadas=(x=0.5, y=4.5) m
+  6. Fase 2C: Coordenadas=(x=0.8, y=4.5) m
+
+--------------------------- DIMENSIONAMENTO DOS CABOS ECC --------------------------
+
+ECC para Circuito 1:
+  Corrente de Falta: 8000 A | Tempo: 0.5 s
+  Isolação considerada: XLPE
+  Seção Mínima Requerida: 39.56 mm^2
+  Cabo Selecionado: Cabo ECC de 70mm^2 (XLPE) selecionado.
+
+ECC para Circuito 2:
+  Corrente de Falta: 8000 A | Tempo: 0.5 s
+  Isolação considerada: XLPE
+  Seção Mínima Requerida: 39.56 mm^2
+  Cabo Selecionado: Cabo ECC de 70mm^2 (XLPE) selecionado.
+
+----------------------------- MATRIZES DE IMPEDÂNCIA (Valores Totais em Ohm)--------------------
+
+--- Matriz de Impedância de Fase (Z_fase) (Ohm) ---
+Linha 1: [(   0.2154 +0.7151j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) (   0.0000 +0.3785j) ]
+Linha 2: [(   0.0000 +0.4795j) (   0.2154 +0.7151j) (   0.0000 +0.4795j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) ]
+Linha 3: [(   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.2154 +0.7151j) (   0.0000 +0.4621j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) ]
+Linha 4: [(   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4621j) (   0.2154 +0.7151j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) ]
+Linha 5: [(   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4795j) (   0.2154 +0.7151j) (   0.0000 +0.4795j) ]
+Linha 6: [(   0.0000 +0.3785j) (   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.2154 +0.7151j) ]
+--- Matriz de Impedância da Blindagem (Z_blindagem) (Ohm) ---
+Linha 1: [(   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) (   0.0000 +0.3785j) ]
+Linha 2: [(   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) ]
+Linha 3: [(   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4621j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) ]
+Linha 4: [(   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4621j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) ]
+Linha 5: [(   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) ]
+Linha 6: [(   0.0000 +0.3785j) (   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) ]
+--- Matriz de Impedância Mútua Fase-Blindagem (Z_sf) (Ohm) ---
+Linha 1: [(   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) (   0.0000 +0.3785j) ]
+Linha 2: [(   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) (   0.0000 +0.3910j) ]
+Linha 3: [(   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4621j) (   0.0000 +0.4284j) (   0.0000 +0.4069j) ]
+Linha 4: [(   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4621j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) (   0.0000 +0.4377j) ]
+Linha 5: [(   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4284j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) (   0.0000 +0.4795j) ]
+Linha 6: [(   0.0000 +0.3785j) (   0.0000 +0.3910j) (   0.0000 +0.4069j) (   0.0000 +0.4377j) (   0.0000 +0.4795j) (   0.1433 +0.6321j) ]
+--- Matriz de Impedância Própria e Mútua dos ECCs (Z_ecc_ecc) (Ohm) ---
+Linha 1: [(   0.7618 +0.7384j) (   0.0000 +0.4069j) ]
+Linha 2: [(   0.0000 +0.4069j) (   0.7618 +0.7384j) ]
+--- Matriz de Impedância Mútua ECC-Fase (Z_ecc_fase) (Ohm) ---
+Linha 1: [(   0.0000 +0.4586j) (   0.0000 +0.4795j) (   0.0000 +0.4586j) (   0.0000 +0.4233j) (   0.0000 +0.4043j) (   0.0000 +0.3895j) ]
+Linha 2: [(   0.0000 +0.3895j) (   0.0000 +0.4043j) (   0.0000 +0.4233j) (   0.0000 +0.4586j) (   0.0000 +0.4795j) (   0.0000 +0.4586j) ]
+
+------------------------------- RESULTADOS DAS ANÁLISES ------------------------------
+
+--- Falta 1ph na Fase 'Fase 1A' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   2.5413 ∠  54.83° V/m  =>   2033.05 ∠  54.83° V
+  Blindagem 'Fase 1B':   0.3761 ∠  84.75° V/m  =>    300.85 ∠  84.75° V
+  Blindagem 'Fase 1C':   0.0301 ∠ -46.51° V/m  =>     24.10 ∠ -46.51° V
+  Blindagem 'Fase 2A':   0.2750 ∠ -78.77° V/m  =>    219.99 ∠ -78.77° V
+  Blindagem 'Fase 2B':   0.5709 ∠ -90.66° V/m  =>    456.72 ∠ -90.66° V
+  Blindagem 'Fase 2C':   0.4532 ∠ -103.18° V/m  =>    362.57 ∠ -103.18° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4146.29 ∠ -175.69° A
+  Corrente no ECC 2:  3877.97 ∠ 175.39° A
+
+--- Falta 1ph na Fase 'Fase 1A' (Apenas Circuito 1 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   2.5320 ∠  54.81° V/m  =>   2025.60 ∠  54.81° V
+  Blindagem 'Fase 1B':   0.3647 ∠  85.49° V/m  =>    291.80 ∠  85.49° V
+  Blindagem 'Fase 1C':   0.0407 ∠ -70.72° V/m  =>     32.60 ∠ -70.72° V
+  Blindagem 'Fase 2A':   0.3351 ∠ -92.30° V/m  =>    268.11 ∠ -92.30° V
+  Blindagem 'Fase 2B':   0.4967 ∠ -93.31° V/m  =>    397.37 ∠ -93.31° V
+  Blindagem 'Fase 2C':   0.4444 ∠ -93.40° V/m  =>    355.56 ∠ -93.40° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4144.03 ∠ -175.78° A
+  Corrente no ECC 2:  3879.23 ∠ 175.49° A
+
+--- Falta 1ph na Fase 'Fase 1B' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.5512 ∠  86.54° V/m  =>    440.99 ∠  86.54° V
+  Blindagem 'Fase 1B':   2.4018 ∠  52.27° V/m  =>   1921.41 ∠  52.27° V
+  Blindagem 'Fase 1C':   0.3963 ∠  86.83° V/m  =>    317.07 ∠  86.83° V
+  Blindagem 'Fase 2A':   0.0753 ∠ -45.91° V/m  =>     60.21 ∠ -45.91° V
+  Blindagem 'Fase 2B':   0.4116 ∠ -91.27° V/m  =>    329.28 ∠ -91.27° V
+  Blindagem 'Fase 2C':   0.3323 ∠ -108.54° V/m  =>    265.82 ∠ -108.54° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4160.11 ∠ -175.33° A
+  Corrente no ECC 2:  3868.53 ∠ 174.98° A
+
+--- Falta 1ph na Fase 'Fase 1B' (Apenas Circuito 1 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.5429 ∠  86.97° V/m  =>    434.29 ∠  86.97° V
+  Blindagem 'Fase 1B':   2.3897 ∠  52.22° V/m  =>   1911.72 ∠  52.22° V
+  Blindagem 'Fase 1C':   0.3794 ∠  87.79° V/m  =>    303.52 ∠  87.79° V
+  Blindagem 'Fase 2A':   0.1201 ∠ -97.00° V/m  =>     96.09 ∠ -97.00° V
+  Blindagem 'Fase 2B':   0.3380 ∠ -95.30° V/m  =>    270.38 ∠ -95.30° V
+  Blindagem 'Fase 2C':   0.3187 ∠ -95.16° V/m  =>    254.96 ∠ -95.16° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4157.81 ∠ -175.42° A
+  Corrente no ECC 2:  3869.74 ∠ 175.08° A
+
+--- Falta 1ph na Fase 'Fase 1C' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1399 ∠  82.57° V/m  =>    111.95 ∠  82.57° V
+  Blindagem 'Fase 1B':   0.3811 ∠  86.93° V/m  =>    304.91 ∠  86.93° V
+  Blindagem 'Fase 1C':   2.4084 ∠  53.08° V/m  =>   1926.71 ∠  53.08° V
+  Blindagem 'Fase 2A':   0.2865 ∠  77.88° V/m  =>    229.19 ∠  77.88° V
+  Blindagem 'Fase 2B':   0.2037 ∠ -87.91° V/m  =>    162.97 ∠ -87.91° V
+  Blindagem 'Fase 2C':   0.1868 ∠ -118.97° V/m  =>    149.40 ∠ -118.97° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4072.82 ∠ -177.72° A
+  Corrente no ECC 2:  3933.76 ∠ 177.64° A
+
+--- Falta 1ph na Fase 'Fase 1C' (Apenas Circuito 1 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1313 ∠  84.12° V/m  =>    105.06 ∠  84.12° V
+  Blindagem 'Fase 1B':   0.3700 ∠  87.73° V/m  =>    296.02 ∠  87.73° V
+  Blindagem 'Fase 1C':   2.3907 ∠  52.98° V/m  =>   1912.59 ∠  52.98° V
+  Blindagem 'Fase 2A':   0.2151 ∠  91.83° V/m  =>    172.05 ∠  91.83° V
+  Blindagem 'Fase 2B':   0.1294 ∠ -96.50° V/m  =>    103.54 ∠ -96.50° V
+  Blindagem 'Fase 2C':   0.1663 ∠ -94.64° V/m  =>    133.06 ∠ -94.64° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  4070.79 ∠ -177.81° A
+  Corrente no ECC 2:  3935.28 ∠ 177.73° A
+
+--- Falta 1ph na Fase 'Fase 2A' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1120 ∠ -55.88° V/m  =>     89.57 ∠ -55.88° V
+  Blindagem 'Fase 1B':   0.2148 ∠ -87.05° V/m  =>    171.81 ∠ -87.05° V
+  Blindagem 'Fase 1C':   0.2364 ∠ 113.30° V/m  =>    189.14 ∠ 113.30° V
+  Blindagem 'Fase 2A':   2.3705 ∠  52.98° V/m  =>   1896.40 ∠  52.98° V
+  Blindagem 'Fase 2B':   0.3592 ∠  88.92° V/m  =>    287.37 ∠  88.92° V
+  Blindagem 'Fase 2C':   0.1228 ∠  86.43° V/m  =>     98.27 ∠  86.43° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3942.90 ∠ 177.73° A
+  Corrente no ECC 2:  4063.18 ∠ -177.80° A
+
+--- Falta 1ph na Fase 'Fase 2A' (Apenas Circuito 2 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1663 ∠ -94.64° V/m  =>    133.06 ∠ -94.64° V
+  Blindagem 'Fase 1B':   0.1294 ∠ -96.50° V/m  =>    103.54 ∠ -96.50° V
+  Blindagem 'Fase 1C':   0.2151 ∠  91.83° V/m  =>    172.05 ∠  91.83° V
+  Blindagem 'Fase 2A':   2.3907 ∠  52.98° V/m  =>   1912.59 ∠  52.98° V
+  Blindagem 'Fase 2B':   0.3700 ∠  87.73° V/m  =>    296.02 ∠  87.73° V
+  Blindagem 'Fase 2C':   0.1313 ∠  84.12° V/m  =>    105.06 ∠  84.12° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3935.28 ∠ 177.73° A
+  Corrente no ECC 2:  4070.79 ∠ -177.81° A
+
+--- Falta 1ph na Fase 'Fase 2B' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.2489 ∠ -78.98° V/m  =>    199.12 ∠ -78.98° V
+  Blindagem 'Fase 1B':   0.4224 ∠ -90.75° V/m  =>    337.95 ∠ -90.75° V
+  Blindagem 'Fase 1C':   0.1548 ∠ -130.88° V/m  =>    123.81 ∠ -130.88° V
+  Blindagem 'Fase 2A':   0.3631 ∠  89.65° V/m  =>    290.51 ∠  89.65° V
+  Blindagem 'Fase 2B':   2.3764 ∠  52.22° V/m  =>   1901.16 ∠  52.22° V
+  Blindagem 'Fase 2C':   0.5346 ∠  87.55° V/m  =>    427.65 ∠  87.55° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3877.35 ∠ 175.08° A
+  Corrente no ECC 2:  4150.24 ∠ -175.41° A
+
+--- Falta 1ph na Fase 'Fase 2B' (Apenas Circuito 2 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.3187 ∠ -95.16° V/m  =>    254.96 ∠ -95.16° V
+  Blindagem 'Fase 1B':   0.3380 ∠ -95.30° V/m  =>    270.38 ∠ -95.30° V
+  Blindagem 'Fase 1C':   0.1201 ∠ -97.00° V/m  =>     96.09 ∠ -97.00° V
+  Blindagem 'Fase 2A':   0.3794 ∠  87.79° V/m  =>    303.52 ∠  87.79° V
+  Blindagem 'Fase 2B':   2.3897 ∠  52.22° V/m  =>   1911.72 ∠  52.22° V
+  Blindagem 'Fase 2C':   0.5429 ∠  86.97° V/m  =>    434.29 ∠  86.97° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3869.74 ∠ 175.08° A
+  Corrente no ECC 2:  4157.81 ∠ -175.42° A
+
+--- Falta 1ph na Fase 'Fase 2C' (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.3739 ∠ -82.33° V/m  =>    299.13 ∠ -82.33° V
+  Blindagem 'Fase 1B':   0.5818 ∠ -90.29° V/m  =>    465.42 ∠ -90.29° V
+  Blindagem 'Fase 1C':   0.3474 ∠ -106.74° V/m  =>    277.93 ∠ -106.74° V
+  Blindagem 'Fase 2A':   0.0545 ∠ -88.90° V/m  =>     43.56 ∠ -88.90° V
+  Blindagem 'Fase 2B':   0.3537 ∠  86.63° V/m  =>    282.92 ∠  86.63° V
+  Blindagem 'Fase 2C':   2.5221 ∠  54.82° V/m  =>   2017.68 ∠  54.82° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3886.84 ∠ 175.49° A
+  Corrente no ECC 2:  4136.45 ∠ -175.77° A
+
+--- Falta 1ph na Fase 'Fase 2C' (Apenas Circuito 2 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.4444 ∠ -93.40° V/m  =>    355.56 ∠ -93.40° V
+  Blindagem 'Fase 1B':   0.4967 ∠ -93.31° V/m  =>    397.37 ∠ -93.31° V
+  Blindagem 'Fase 1C':   0.3351 ∠ -92.30° V/m  =>    268.11 ∠ -92.30° V
+  Blindagem 'Fase 2A':   0.0407 ∠ -70.72° V/m  =>     32.60 ∠ -70.72° V
+  Blindagem 'Fase 2B':   0.3647 ∠  85.49° V/m  =>    291.80 ∠  85.49° V
+  Blindagem 'Fase 2C':   2.5320 ∠  54.81° V/m  =>   2025.60 ∠  54.81° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:  3879.23 ∠ 175.49° A
+  Corrente no ECC 2:  4144.03 ∠ -175.78° A
+
+--- Falta 3ph no Ckt 1 (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   3.1322 ∠  46.25° V/m  =>   2505.78 ∠  46.25° V
+  Blindagem 'Fase 1B':   2.4996 ∠ -74.28° V/m  =>   1999.65 ∠ -74.28° V
+  Blindagem 'Fase 1C':   2.6321 ∠ 175.86° V/m  =>   2105.68 ∠ 175.86° V
+  Blindagem 'Fase 2A':   0.4839 ∠ -142.26° V/m  =>    387.12 ∠ -142.26° V
+  Blindagem 'Fase 2B':   0.4048 ∠ -136.77° V/m  =>    323.84 ∠ -136.77° V
+  Blindagem 'Fase 2C':   0.3535 ∠ -158.57° V/m  =>    282.82 ∠ -158.57° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:   148.69 ∠ 148.87° A
+  Corrente no ECC 2:   333.42 ∠  13.28° A
+
+--- Falta 3ph no Ckt 1 (Apenas Circuito 1 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   3.1270 ∠  46.22° V/m  =>   2501.63 ∠  46.22° V
+  Blindagem 'Fase 1B':   2.5055 ∠ -74.41° V/m  =>   2004.40 ∠ -74.41° V
+  Blindagem 'Fase 1C':   2.6364 ∠ 176.15° V/m  =>   2109.14 ∠ 176.15° V
+  Blindagem 'Fase 2A':   0.5730 ∠ -141.38° V/m  =>    458.40 ∠ -141.38° V
+  Blindagem 'Fase 2B':   0.3724 ∠ -147.77° V/m  =>    297.92 ∠ -147.77° V
+  Blindagem 'Fase 2C':   0.2810 ∠ -152.89° V/m  =>    224.81 ∠ -152.89° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:   146.87 ∠ 146.29° A
+  Corrente no ECC 2:   333.11 ∠  11.83° A
+
+--- Falta 3ph no Ckt 2 (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.2822 ∠  54.78° V/m  =>    225.73 ∠  54.78° V
+  Blindagem 'Fase 1B':   0.2156 ∠  47.13° V/m  =>    172.51 ∠  47.13° V
+  Blindagem 'Fase 1C':   0.4461 ∠  78.98° V/m  =>    356.91 ∠  78.98° V
+  Blindagem 'Fase 2A':   2.9629 ∠  43.45° V/m  =>   2370.34 ∠  43.45° V
+  Blindagem 'Fase 2B':   2.7092 ∠ -75.95° V/m  =>   2167.39 ∠ -75.95° V
+  Blindagem 'Fase 2C':   2.6403 ∠ -179.09° V/m  =>   2112.20 ∠ -179.09° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:   231.11 ∠ -138.87° A
+  Corrente no ECC 2:   282.80 ∠  98.16° A
+
+--- Falta 3ph no Ckt 2 (Apenas Circuito 2 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1777 ∠  59.89° V/m  =>    142.19 ∠  59.89° V
+  Blindagem 'Fase 1B':   0.2701 ∠  62.72° V/m  =>    216.12 ∠  62.72° V
+  Blindagem 'Fase 1C':   0.4659 ∠  67.97° V/m  =>    372.72 ∠  67.97° V
+  Blindagem 'Fase 2A':   2.9823 ∠  43.42° V/m  =>   2385.87 ∠  43.42° V
+  Blindagem 'Fase 2B':   2.7053 ∠ -75.69° V/m  =>   2164.25 ∠ -75.69° V
+  Blindagem 'Fase 2C':   2.6317 ∠ -179.18° V/m  =>   2105.35 ∠ -179.18° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:   229.86 ∠ -137.67° A
+  Corrente no ECC 2:   282.31 ∠ 100.45° A
+
+--- Regime Permanente (Ambos Circuitos ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1115 ∠  46.87° V/m  =>     89.21 ∠  46.87° V
+  Blindagem 'Fase 1B':   0.0794 ∠ -70.43° V/m  =>     63.55 ∠ -70.43° V
+  Blindagem 'Fase 1C':   0.0863 ∠ 167.30° V/m  =>     69.04 ∠ 167.30° V
+  Blindagem 'Fase 2A':   0.0701 ∠  44.75° V/m  =>     56.06 ∠  44.75° V
+  Blindagem 'Fase 2B':   0.0859 ∠ -83.75° V/m  =>     68.72 ∠ -83.75° V
+  Blindagem 'Fase 2C':   0.0876 ∠ -176.41° V/m  =>     70.10 ∠ -176.41° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:     9.44 ∠ -168.56° A
+  Corrente no ECC 2:    14.30 ∠  48.12° A
+
+--- Regime Permanente (Apenas Circuito 1 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.1063 ∠  46.22° V/m  =>     85.06 ∠  46.22° V
+  Blindagem 'Fase 1B':   0.0852 ∠ -74.41° V/m  =>     68.15 ∠ -74.41° V
+  Blindagem 'Fase 1C':   0.0896 ∠ 176.15° V/m  =>     71.71 ∠ 176.15° V
+  Blindagem 'Fase 2A':   0.0195 ∠ -141.38° V/m  =>     15.59 ∠ -141.38° V
+  Blindagem 'Fase 2B':   0.0127 ∠ -147.77° V/m  =>     10.13 ∠ -147.77° V
+  Blindagem 'Fase 2C':   0.0096 ∠ -152.89° V/m  =>      7.64 ∠ -152.89° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:     4.99 ∠ 146.29° A
+  Corrente no ECC 2:    11.33 ∠  11.83° A
+
+--- Regime Permanente (Apenas Circuito 2 ON) ---
+Tensões Induzidas nas Blindagens (à terra local):
+  Blindagem 'Fase 1A':   0.0053 ∠  59.89° V/m  =>      4.27 ∠  59.89° V
+  Blindagem 'Fase 1B':   0.0081 ∠  62.72° V/m  =>      6.48 ∠  62.72° V
+  Blindagem 'Fase 1C':   0.0140 ∠  67.97° V/m  =>     11.18 ∠  67.97° V
+  Blindagem 'Fase 2A':   0.0895 ∠  43.42° V/m  =>     71.58 ∠  43.42° V
+  Blindagem 'Fase 2B':   0.0812 ∠ -75.69° V/m  =>     64.93 ∠ -75.69° V
+  Blindagem 'Fase 2C':   0.0790 ∠ -179.18° V/m  =>     63.16 ∠ -179.18° V
+Correntes nos Cabos ECC:
+  Corrente no ECC 1:     6.90 ∠ -137.67° A
+  Corrente no ECC 2:     8.47 ∠ 100.45° A
+
+----------------------------- DIMENSIONAMENTO DO SVL ------------------------------
+
+Cenário Crítico: Falta 3ph no Ckt 1 (Ambos Circuitos ON) (Pior Caso)
+Tensão Máxima de Falta (TOV) na Linha: 2.51 kV
+Fator de Sobretensão Temporária da Rede (k_tov): 1.2
+Nível de Impulso Suportável (NBI) da Blindagem: 50.00 kVp
+
+SVL Selecionado: SVL-6kV
+Justificativa: SVL 'SVL-6kV' atende aos critérios.
+
+================================================================================
+FIM DO MEMORIAL
+================================================================================
